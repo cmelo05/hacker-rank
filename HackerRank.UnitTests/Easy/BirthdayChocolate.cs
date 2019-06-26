@@ -31,17 +31,18 @@ namespace HackerRank.UnitTests.Easy
         {
             var ways = 0;
             var skip = 0;
-            foreach(var piece in s)
+
+            do
             {
                 var chocPieces = s.Skip(skip).Take(m);
                 var sumChocPieces = chocPieces.Sum();
 
-                if(chocPieces.Count() == m && sumChocPieces == d)
+                if (chocPieces.Count() == m && sumChocPieces == d)
                 {
                     ways++;
                 }
                 skip++;
-            }
+            } while (skip < s.Count);
 
             return ways;
         }

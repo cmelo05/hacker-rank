@@ -19,7 +19,7 @@ namespace HackerRank.UnitTests.Medium
 
             for (int i = 0; i < alice.Length; i++)
             {
-                var searchIndex = BinarySearchRecursive(distinctScores, alice[i], 0, distinctScores.Length - 1);
+                var searchIndex = FindIndex(distinctScores, alice[i]);
 
                 if (searchIndex == -1)
                 {
@@ -35,6 +35,7 @@ namespace HackerRank.UnitTests.Medium
             return positionInLeaderboard;
         }
 
+        //Recursive
         private static int BinarySearchRecursive(int[] scores, int compareValue, int startIndex, int endIndex)
         {
             if (startIndex == endIndex)
@@ -64,9 +65,7 @@ namespace HackerRank.UnitTests.Medium
 
             var midIndex = (startIndex + endIndex) / 2;
 
-            var score = scores[midIndex];
-
-            if (compareValue > score)
+            if (compareValue > scores[midIndex])
             {
                 endIndex = midIndex - 1;
                 return BinarySearchRecursive(scores, compareValue, startIndex, endIndex);
@@ -79,6 +78,40 @@ namespace HackerRank.UnitTests.Medium
             else
             {
                 return midIndex;
+            }
+        }
+
+        private static int FindIndex(int[] scores, int compareValue)
+        {
+            var startIndex = 0;
+            var endIndex = scores.Length - 1;           
+
+            while(startIndex < endIndex)
+            {
+                var midIndex = (startIndex + endIndex) / 2;
+
+                if (compareValue > scores[midIndex])
+                {
+                    endIndex = midIndex - 1;
+                }
+                else if (compareValue < scores[midIndex])
+                {
+                    startIndex = midIndex + 1;
+                }
+                else
+                {
+                    return midIndex;
+                }
+            }
+
+            if (compareValue < scores[startIndex])
+            {
+                // Value is smaller than current index. It should have a higher index
+                return startIndex == endIndex ? startIndex + 1 : -1;
+            }
+            else
+            {
+                return startIndex;
             }
         }
 

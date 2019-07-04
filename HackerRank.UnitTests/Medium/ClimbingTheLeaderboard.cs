@@ -23,6 +23,7 @@ namespace HackerRank.UnitTests.Medium
 
                 if (searchIndex == -1)
                 {
+                    // Last ranking
                     positionInLeaderboard[i] = distinctScores.Length + 1;
                 }
                 else
@@ -38,13 +39,15 @@ namespace HackerRank.UnitTests.Medium
         {
             if (startIndex == endIndex)
             {
-                if(compareValue < scores[startIndex])
+                if (compareValue < scores[startIndex])
                 {
+                    // Value is smaller than current index. It should have a higher index
                     return startIndex + 1;
-                } else
+                }
+                else
                 {
                     return startIndex;
-                }                
+                }
             }
 
             if (startIndex > endIndex)
@@ -82,27 +85,27 @@ namespace HackerRank.UnitTests.Medium
         [TestMethod]
         public void ClimbingTheLeaderboardTest()
         {
-            //var scores = new int[] { 100, 50, 40, 40, 20, 10 };
-            //var alice = new int[] { 5, 25, 50, 120 };
+            var scores = new int[] { 100, 50, 40, 40, 20, 10 };
+            var alice = new int[] { 5, 25, 50, 120 };
 
-            //var leaderboard = climbingLeaderboard(scores, alice);
+            var leaderboard = climbingLeaderboard(scores, alice);
 
-            //var expectedLeaderboard = new int[] { 6, 4, 2, 1 };
+            var expectedLeaderboard = new int[] { 6, 4, 2, 1 };
 
-            //var scores2 = new int[] { 100, 90, 90, 80, 75, 60 };
-            //var alice2 = new int[] { 55, 65, 77, 90, 102 };
+            var scores2 = new int[] { 100, 90, 90, 80, 75, 60 };
+            var alice2 = new int[] { 55, 65, 77, 90, 102 };
 
-            //var leaderboard2 = climbingLeaderboard(scores2, alice2);
+            var leaderboard2 = climbingLeaderboard(scores2, alice2);
 
-            //var expectedLeaderboard2 = new int[] { 6, 5, 4, 2, 1 };
+            var expectedLeaderboard2 = new int[] { 6, 5, 4, 2, 1 };
 
             var scores3 = TestHelpers.LoadInputFile($"{Directory.GetCurrentDirectory()}\\Files\\input_ClimbingTheLeaderboard_scores.txt");
             var alice3 = TestHelpers.LoadInputFile($"{Directory.GetCurrentDirectory()}\\Files\\input_ClimbingTheLeaderboard_alice.txt");
             var leaderboard3 = climbingLeaderboard(scores3, alice3);
             var expectedLeaderboard3 = TestHelpers.LoadResultFile($"{Directory.GetCurrentDirectory()}\\Files\\result_ClimbingTheLeaderboard.txt");
 
-            //CollectionAssert.AreEqual(expectedLeaderboard, leaderboard);
-            //CollectionAssert.AreEqual(expectedLeaderboard2, leaderboard2);
+            CollectionAssert.AreEqual(expectedLeaderboard, leaderboard);
+            CollectionAssert.AreEqual(expectedLeaderboard2, leaderboard2);
             CollectionAssert.AreEqual(expectedLeaderboard3, leaderboard3);
 
         }

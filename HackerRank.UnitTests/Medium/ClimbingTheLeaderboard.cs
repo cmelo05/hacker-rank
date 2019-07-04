@@ -38,24 +38,12 @@ namespace HackerRank.UnitTests.Medium
         //Recursive
         private static int BinarySearchRecursive(int[] scores, int compareValue, int startIndex, int endIndex)
         {
-            if (startIndex == endIndex)
+            if (startIndex >= endIndex)
             {
                 if (compareValue < scores[startIndex])
                 {
                     // Value is smaller than current index. It should have a higher index
-                    return startIndex + 1;
-                }
-                else
-                {
-                    return startIndex;
-                }
-            }
-
-            if (startIndex > endIndex)
-            {
-                if (compareValue < scores[startIndex])
-                {
-                    return -1;
+                    return startIndex == endIndex ? startIndex + 1 : -1;
                 }
                 else
                 {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace HackerRank.UnitTests.Helpers
 {
@@ -14,6 +15,18 @@ namespace HackerRank.UnitTests.Helpers
                 action.Invoke();
                 Assert.AreEqual(expectedResult, sw.ToString());
             }
+        }
+
+        public static int[] LoadInputFile(string path)
+        {
+            var file = File.ReadAllLines(path);
+            return Array.ConvertAll(file[1].Split(' '), fileTemp => Convert.ToInt32(fileTemp));
+        }
+
+        public static int[] LoadResultFile(string path)
+        {
+            var file = File.ReadAllLines(path);
+            return Array.ConvertAll(file, fileTemp => Convert.ToInt32(fileTemp));
         }
     }
 }

@@ -10,228 +10,95 @@ namespace HackerRank.UnitTests.Medium
     [TestClass]
     public class FormingMagicSquare
     {
-        public int formingMagicSquare(int[][] s)
+        private static List<int[][]> magicSquares = new List<int[][]>()
         {
-            int output = 0;
-
-            for (int i = 0; i < s.Length; i++)
             {
-                int diagonalSum = s[0][0] + s[1][1] + s[2][2];
-                int diffDiag = 15 - diagonalSum;
-                int rowSum = s[i][0] + s[i][1] + s[i][2];
-                int diffRow = 15 - rowSum;
-
-                for (int j = 0; j < s[i].Length; j++)
-                {
-                    int columnSum = s[0][j] + s[1][j] + s[2][j];
-                    int diffColumn = 15 - columnSum;
-
-                    if (i == j && diffRow == diffDiag && diffRow == diffColumn && diffDiag == diffColumn)
-                    {
-                        int oldValue = s[i][j];
-                        s[i][j] = s[i][j] + diffRow;
-
-                        if (checkMagicSquare(s))
-                        {
-                            output += Math.Abs(s[i][j] - oldValue);
-                            break;
-                        }
-                        else
-                        {
-                            s[i][j] = oldValue;
-                        }
-                    }
-
-                    if (diffColumn != 0)
-                    {
-                        int oldValue = s[i][j];
-                        s[i][j] = s[i][j] + diffColumn;
-
-                        if (checkMagicSquare(s))
-                        {
-                            output += Math.Abs(s[i][j] - oldValue);
-                            break;
-                        }
-                        else
-                        {
-                            s[i][j] = oldValue;
-                        }
-                    }
-
-                    if (diffRow != 0)
-                    {
-                        int oldValue = s[i][j];
-                        s[i][j] = s[i][j] + diffRow;
-
-                        if (checkMagicSquare(s))
-                        {
-                            output += Math.Abs(s[i][j] - oldValue);
-                            break;
-                        }
-                        else
-                        {
-                            s[i][j] = oldValue;
-                        }
-                    }
-
-                    if (i == j && diffDiag != 0)
-                    {
-                        int oldValue = s[i][j];
-                        s[i][j] = s[i][j] + diffDiag;
-
-                        if (checkMagicSquare(s))
-                        {
-                            output += Math.Abs(s[i][j] - oldValue);
-                            break;
-                        }
-                        else
-                        {
-                            s[i][j] = oldValue;
-                        }
-                    }
-
-
+                new int[][]{
+                    new int[]{8, 1, 6},
+                    new int[]{3, 5, 7},
+                    new int[]{4, 9, 2}
+                }
+            },
+            {
+                new int[][]{
+                    new int[]{6, 1, 8},
+                    new int[]{7, 5, 3},
+                    new int[]{2, 9, 4}
+                }
+            },
+            {
+                new int[][]{
+                    new int[]{4, 3, 8},
+                    new int[]{9, 5, 1},
+                    new int[]{2, 7, 6}
+                }
+            }
+            ,{
+                new int[][]{
+                    new int[]{2, 7, 6},
+                    new int[]{9, 5, 1},
+                    new int[]{4, 3, 8}
+                }
+            },
+            {
+                new int[][]{
+                    new int[]{2, 9, 4},
+                    new int[]{7, 5, 3},
+                    new int[]{6, 1, 8}
+                }
+            },
+            {
+                new int[][]{
+                    new int[]{4, 9, 2},
+                    new int[]{3, 5, 7},
+                    new int[]{8, 1, 6}
+                }
+            },
+            {
+                new int[][]{
+                    new int[]{6, 7, 2},
+                    new int[]{1, 5, 9},
+                    new int[]{8, 3, 4}
+                }
+            },
+            {
+                new int[][]{
+                    new int[]{8, 3, 4},
+                    new int[]{1, 5, 9},
+                    new int[]{6, 7, 2}
                 }
             }
 
-            if(output != 0)
-            {
-                return output;
-            }
+        };
 
-            for (int i = 0; i < s.Length; i++)
-            {
-                int diagonalSum = s[0][0] + s[1][1] + s[2][2];
-                int diffDiag = 15 - diagonalSum;
-                int rowSum = s[i][0] + s[i][1] + s[i][2];
-                int diffRow = 15 - rowSum;
+        public static int formingMagicSquare(int[][] s)
+        {
+            int minMoves = int.MaxValue;
 
-                for (int j = 0; j < s[i].Length; j++)
+            foreach (var matrix in magicSquares)
+            {
+                int costByMatrix = 0;
+                for (int i = 0; i < matrix.Length; i++)
                 {
-                    int columnSum = s[0][j] + s[1][j] + s[2][j];
-                    int diffColumn = 15 - columnSum;
-
-                    if(i == j && diffDiag == 0)
+                    for (int j = 0; j < matrix[i].Length; j++)
                     {
-                        continue;
+                        int cost = Math.Abs(s[i][j] - matrix[i][j]);
+                        costByMatrix += cost;
                     }
+                }
 
-                    if (i == j && diffRow == diffDiag && diffRow == diffColumn && diffDiag == diffColumn)
-                    {
-                        int oldValue = s[i][j];
-                        s[i][j] = s[i][j] + diffRow;
-
-                        if (checkMagicSquare(s))
-                        {
-                            output += Math.Abs(s[i][j] - oldValue);
-                            break;
-                        }
-                        else
-                        {
-                            output += Math.Abs(s[i][j] - oldValue);
-                            break;
-                            //s[i][j] = oldValue;
-                        }
-                    }
-
-                    if (diffColumn != 0)
-                    {
-                        int oldValue = s[i][j];
-                        s[i][j] = s[i][j] + diffColumn;
-
-                        if (checkMagicSquare(s))
-                        {
-                            output += Math.Abs(s[i][j] - oldValue);
-                            break;
-                        }
-                        else
-                        {
-                            output += Math.Abs(s[i][j] - oldValue);
-                            break;
-                            //s[i][j] = oldValue;
-                        }
-                    }
-
-                    if (diffRow != 0)
-                    {
-                        int oldValue = s[i][j];
-                        s[i][j] = s[i][j] + diffRow;
-
-                        if (checkMagicSquare(s))
-                        {
-                            output += Math.Abs(s[i][j] - oldValue);
-                            break;
-                        }
-                        else
-                        {
-                            output += Math.Abs(s[i][j] - oldValue);
-                            break;
-                        }
-                    }
-
-                    if (i == j && diffDiag != 0)
-                    {
-                        int oldValue = s[i][j];
-                        s[i][j] = s[i][j] + diffDiag;
-
-                        if (checkMagicSquare(s))
-                        {
-                            output += Math.Abs(s[i][j] - oldValue);
-                            break;
-                        }
-                        else
-                        {
-                            output += Math.Abs(s[i][j] - oldValue);
-                            break;
-                            //s[i][j] = oldValue;
-                        }
-                    }
-
-
+                if (costByMatrix < minMoves)
+                {
+                    minMoves = costByMatrix;
                 }
             }
 
-
-            return output;
-        }
-
-        private bool testColumn(int[][] s, int i)
-        {
-            return (s[0][i] + s[1][i] + s[2][i]) == 15;
-        }
-
-        private bool testRow(int[][] s, int j)
-        {
-            return (s[j][0] + s[j][1] + s[j][2]) == 15;
-        }
-
-        private bool testDiagonal(int[][] s)
-        {
-            return (s[0][0] + s[1][1] + s[2][2]) == 15;
-        }
-
-        private bool checkMagicSquare(int[][] s)
-        {
-            return testColumn(s, 0)
-                && testColumn(s, 1)
-                && testColumn(s, 2)
-                && testRow(s, 0)
-                && testRow(s, 1)
-                && testRow(s, 2)
-                && testDiagonal(s);
+            return minMoves;
         }
 
         [TestMethod]
         public void FormingMagicSquareMethod()
         {
-            //            4 8 2
-            //4 5 7
-            //6 1 6
-
-            //            4 9 2
-            //3 5 7
-            //8 1 5
-
             int[][] matrix = new int[][]
             {
                 new[]{4, 9, 2},
@@ -245,11 +112,19 @@ namespace HackerRank.UnitTests.Medium
                 new[]{ 6, 1, 6 }
             };
 
+            int[][] matrix2 = new int[][] {
+                new[]{ 4, 5, 8 },
+                new[]{ 2, 4, 1 },
+                new[]{ 1,9, 7 }
+            };
+
             int count = formingMagicSquare(matrix);
             int count1 = formingMagicSquare(matrix1);
+            int count2 = formingMagicSquare(matrix2);
 
             Assert.AreEqual(1, count);
             Assert.AreEqual(4, count1);
+            Assert.AreEqual(14, count2);
         }
     }
 }

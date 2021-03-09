@@ -94,6 +94,104 @@ namespace HackerRank.UnitTests.Medium
                 }
             }
 
+            if(output != 0)
+            {
+                return output;
+            }
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                int diagonalSum = s[0][0] + s[1][1] + s[2][2];
+                int diffDiag = 15 - diagonalSum;
+                int rowSum = s[i][0] + s[i][1] + s[i][2];
+                int diffRow = 15 - rowSum;
+
+                for (int j = 0; j < s[i].Length; j++)
+                {
+                    int columnSum = s[0][j] + s[1][j] + s[2][j];
+                    int diffColumn = 15 - columnSum;
+
+                    if(i == j && diffDiag == 0)
+                    {
+                        continue;
+                    }
+
+                    if (i == j && diffRow == diffDiag && diffRow == diffColumn && diffDiag == diffColumn)
+                    {
+                        int oldValue = s[i][j];
+                        s[i][j] = s[i][j] + diffRow;
+
+                        if (checkMagicSquare(s))
+                        {
+                            output += Math.Abs(s[i][j] - oldValue);
+                            break;
+                        }
+                        else
+                        {
+                            output += Math.Abs(s[i][j] - oldValue);
+                            break;
+                            //s[i][j] = oldValue;
+                        }
+                    }
+
+                    if (diffColumn != 0)
+                    {
+                        int oldValue = s[i][j];
+                        s[i][j] = s[i][j] + diffColumn;
+
+                        if (checkMagicSquare(s))
+                        {
+                            output += Math.Abs(s[i][j] - oldValue);
+                            break;
+                        }
+                        else
+                        {
+                            output += Math.Abs(s[i][j] - oldValue);
+                            break;
+                            //s[i][j] = oldValue;
+                        }
+                    }
+
+                    if (diffRow != 0)
+                    {
+                        int oldValue = s[i][j];
+                        s[i][j] = s[i][j] + diffRow;
+
+                        if (checkMagicSquare(s))
+                        {
+                            output += Math.Abs(s[i][j] - oldValue);
+                            break;
+                        }
+                        else
+                        {
+                            output += Math.Abs(s[i][j] - oldValue);
+                            break;
+                        }
+                    }
+
+                    if (i == j && diffDiag != 0)
+                    {
+                        int oldValue = s[i][j];
+                        s[i][j] = s[i][j] + diffDiag;
+
+                        if (checkMagicSquare(s))
+                        {
+                            output += Math.Abs(s[i][j] - oldValue);
+                            break;
+                        }
+                        else
+                        {
+                            output += Math.Abs(s[i][j] - oldValue);
+                            break;
+                            //s[i][j] = oldValue;
+                        }
+                    }
+
+
+                }
+            }
+
+
             return output;
         }
 

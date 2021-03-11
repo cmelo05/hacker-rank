@@ -120,10 +120,10 @@ namespace HackerRank.UnitTests.Medium
 
             var expectedLeaderboard2 = new int[] { 6, 5, 4, 2, 1 };
 
-            var scores3 = TestHelpers.LoadInputFile($"{Directory.GetCurrentDirectory()}\\Files\\input_ClimbingTheLeaderboard_scores.txt");
-            var alice3 = TestHelpers.LoadInputFile($"{Directory.GetCurrentDirectory()}\\Files\\input_ClimbingTheLeaderboard_alice.txt");
+            var scores3 = TestHelpers.LoadInputFile($"{Directory.GetCurrentDirectory()}/Files/input_ClimbingTheLeaderboard_scores.txt");
+            var alice3 = TestHelpers.LoadInputFile($"{Directory.GetCurrentDirectory()}/Files/input_ClimbingTheLeaderboard_alice.txt");
             var leaderboard3 = climbingLeaderboard(scores3, alice3);
-            var expectedLeaderboard3 = TestHelpers.LoadResultFile($"{Directory.GetCurrentDirectory()}\\Files\\result_ClimbingTheLeaderboard.txt");
+            var expectedLeaderboard3 = TestHelpers.LoadResultFile($"{Directory.GetCurrentDirectory()}/Files/result_ClimbingTheLeaderboard.txt");
 
             CollectionAssert.AreEqual(expectedLeaderboard, leaderboard);
             CollectionAssert.AreEqual(expectedLeaderboard2, leaderboard2);

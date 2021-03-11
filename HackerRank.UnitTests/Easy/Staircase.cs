@@ -25,7 +25,9 @@ namespace HackerRank.UnitTests.Easy
                         Console.Write("#");
                     }
                 }
-                Console.WriteLine();
+                if(i != n){
+                    Console.WriteLine();
+                }
 
             }
         }
@@ -33,12 +35,12 @@ namespace HackerRank.UnitTests.Easy
         [TestMethod]
         public void StaircaseTest()
         {
-            var expectedString = "     #\r\n" +
-                                "    ##\r\n" +
-                                "   ###\r\n" +
-                                "  ####\r\n" +
-                                " #####\r\n" +
-                                "######\r\n";
+            var expectedString = $"     #{Environment.NewLine}" +
+                                $"    ##{Environment.NewLine}" +
+                                $"   ###{Environment.NewLine}" +
+                                $"  ####{Environment.NewLine}" +
+                                $" #####{Environment.NewLine}" +
+                                $"######";
 
             TestHelpers.AssertConsole(() => staircase(6), expectedString);
         }

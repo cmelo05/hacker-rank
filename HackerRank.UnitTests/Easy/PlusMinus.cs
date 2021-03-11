@@ -41,7 +41,7 @@ namespace HackerRank.UnitTests.Easy
         [TestMethod]
         public void PlusMinusTest()
         {
-            var expectedResult = $"0,500000{Environment.NewLine}0,333333{Environment.NewLine}0,166667{Environment.NewLine}";
+            var expectedResult = $"0.500000{Environment.NewLine}0.333333{Environment.NewLine}0.166667{Environment.NewLine}";
             int[] arr = new int[] { -4, 3, -9, 0, 4, 1 };
             TestHelpers.AssertConsole(() => plusMinus(arr), expectedResult);
         }
